@@ -1,4 +1,3 @@
-const arr = [3, 2, 1, 13, 8, 5, 1, 0];
 let countIteration = 0;
 
 const mergeSort = (arr, result = []) => {
@@ -25,5 +24,5 @@ const mergeSort = (arr, result = []) => {
   return mergeSort(arr, result);
 }
 
-console.log(mergeSort(arr)); // [0, 1, 1, 2, 3, 5, 8, 13]
-console.log(countIteration); // 16 Iterations
+console.log(mergeSort([3,2,4,1,0,32,1,1,5,99,2,1]))
+console.log(countIteration);
