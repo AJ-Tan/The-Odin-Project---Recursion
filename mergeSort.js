@@ -1,27 +1,25 @@
 let countIteration = 0;
 
-const mergeSort = (arr, result = []) => {
-  if(arr.length <= 0) return result;
+const mergeSort = (arr) => {
+  if(arr.length === 1) return arr;
+  const midLength = Math.round(arr.length / 2);
+  const [leftNode, rightNode] = [mergeSort(arr.slice(0, midLength)), mergeSort(arr.slice(midLength))];
+  
+  const len = leftNode.length-1;
+  rightNode.forEach(rightValue => {
+    countIteration++;
+    const findIndex = leftNode.findIndex(leftValue => leftValue > rightValue);
 
-  const currentNum = arr.shift();
-
-  if(result.length <= 0) {
-    result.push(currentNum);
-  } else {
-    for(let i = 0; i < result.length; i++) {
-      countIteration += 1;
-      if(currentNum < result[i]) {
-        result.splice(i, 0, currentNum);
-        break;
-      }
-      if(i === result.length - 1) {
-        result.push(currentNum);
-        break;
-      }
+    if(findIndex < 0) {
+      leftNode.push(rightValue);
+    } else if(findIndex === 0) {
+      leftNode.unshift(rightValue);
+    } else {
+      leftNode.splice(findIndex, 0, rightValue);
     }
-  }
+  })
 
-  return mergeSort(arr, result);
+  return leftNode;
 }
 
 console.log(mergeSort([3,2,4,1,0,32,1,1,5,99,2,1]))
